@@ -1,5 +1,6 @@
 package com.example.ToDoApp.service;
 
+import com.example.ToDoApp.dto.mapper.Mapper;
 import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
 import com.example.ToDoApp.model.Role;
@@ -17,9 +18,15 @@ public class RoleServiceImpl implements RoleService{
     private final RoleRepository roleRepository;
     private PageRequest rolePageable;
     public final ModelMapper modelMapper = new ModelMapper();
+
+    //add a new role
     @Override
     public RoleResponseDto addRole(RoleRequestDto roleRequestDto) {
-        return null;
+        Role role = new Role();
+        role.setRoleName(roleRequestDto.getRoleName());
+        //save role
+        roleRepository.save(role);
+        return Mapper.roleToRoleResponseDto(role);
     }
 
     @Override
