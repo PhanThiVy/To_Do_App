@@ -4,11 +4,19 @@ import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
 import com.example.ToDoApp.model.Role;
 import com.example.ToDoApp.model.User;
+import com.example.ToDoApp.repository.RoleRepository;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService{
+    private final RoleRepository roleRepository;
+    private PageRequest rolePageable;
+    public final ModelMapper modelMapper = new ModelMapper();
     @Override
     public RoleResponseDto addRole(RoleRequestDto roleRequestDto) {
         return null;
