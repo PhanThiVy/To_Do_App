@@ -3,6 +3,7 @@ package com.example.ToDoApp.service;
 import com.example.ToDoApp.dto.mapper.Mapper;
 import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
+import com.example.ToDoApp.exception.NotFoundException;
 import com.example.ToDoApp.model.Role;
 import com.example.ToDoApp.model.User;
 import com.example.ToDoApp.repository.RoleRepository;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +44,13 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public Role getRole(Long roleId) {
-        return null;
+        //check roleId is a number
+        if (!String.valueOf(roleId).matches("\\d+")) {
+            throw new NotFoundException(HttpStatus.NOT_FOUND.value(),"Please enter number for role id.");
+        }
+        Role role = roleRepository.findById(roleId).orqElseThrow(()
+                -> new NotFoundException(HttpStatus.NOT_FOUND.value(),"Can not find role with id "+ roleId));
+        return role;
     }
 
     @Override
