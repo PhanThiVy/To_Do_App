@@ -1,6 +1,8 @@
 package com.example.ToDoApp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -16,6 +18,10 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
     private String password;
+    @Email
+    @NotEmpty
+    @Column(unique = true)
+    private String email;
     @ManyToMany(cascade =
             {
                     CascadeType.DETACH,
