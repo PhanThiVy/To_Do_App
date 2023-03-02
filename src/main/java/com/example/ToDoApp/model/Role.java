@@ -3,10 +3,12 @@ package com.example.ToDoApp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -35,5 +37,4 @@ public class Role {
     public void removeUser(User user) {
         users.remove(user);
     }
-
 }
