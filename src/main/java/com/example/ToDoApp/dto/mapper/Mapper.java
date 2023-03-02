@@ -18,7 +18,7 @@ public class Mapper {
         List<String> userNames = new ArrayList<>();
         List<User> users = role.getUserList();
         for (User user: users) {
-            userNames.add(user.getUsername());
+            userNames.add(user.getUserName());
         }
         roleResponseDto.setUserNames(userNames);
 
@@ -29,7 +29,7 @@ public class Mapper {
     public static UserResponseDto userToUserResponseDto(User user){
         UserResponseDto userResponseDto =new UserResponseDto();
         userResponseDto.setId(user.getId());
-        userResponseDto.setUsername(user.getUsername());
+        userResponseDto.setUsername(user.getUserName());
         userResponseDto.setPassword(user.getPassword());
 
         List<String> roleNames = new ArrayList<>();
