@@ -1,12 +1,14 @@
 package com.example.ToDoApp.exception;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class ErrorDetail {
     private int errorCode;
-    private String mesage;
+    private String message;
 }

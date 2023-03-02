@@ -1,21 +1,19 @@
-package com.example.Book.exception;
+package com.example.ToDoApp.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@RequiredArgsConstructor
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class NotFoundException extends RuntimeException {
-    private int errorCode;
+    private final ErrorDetail errorDetail;
+    private String message;
 
     public NotFoundException(int errorCode, String message) {
-
-        super(message);
-        this.errorCode=errorCode;
+        super();
+        this.errorDetail = new ErrorDetail().builder()
+                .errorCode(errorCode)
+                .message(message)
+                .build();
     }
 
 

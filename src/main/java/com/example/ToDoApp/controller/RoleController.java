@@ -27,6 +27,8 @@ public class RoleController {
         return new ResponseEntity<>(roleResponseDtos,HttpStatus.OK);
     }
 
+    //get role by id
+
 
 
 
