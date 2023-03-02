@@ -8,14 +8,18 @@ import com.example.ToDoApp.model.User;
 import com.example.ToDoApp.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService{
     private final RoleRepository roleRepository;
+    @Autowired
     private PageRequest rolePageable;
     public final ModelMapper modelMapper = new ModelMapper();
 
@@ -29,9 +33,11 @@ public class RoleServiceImpl implements RoleService{
         return Mapper.roleToRoleResponseDto(role);
     }
 
+    //get role list
     @Override
     public Page<RoleResponseDto> getRoleList(int pageNumber) {
-        return null;
+        Page<Role> rolePage = roleRepository.findAll(rolePageable.withPage(pageNumber));
+        return rolePage.map(role -> modelMapper.map(role,RoleResponseDto.class));
     }
 
     @Override
