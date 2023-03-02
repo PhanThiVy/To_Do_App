@@ -1,6 +1,6 @@
 package com.example.ToDoApp.exception;
 
-public class ErrorResponse {
+public class ErrorDetails {
     private Long errorCode;
     private String message;
 }
