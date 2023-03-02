@@ -16,10 +16,10 @@ public class Mapper {
         roleResponseDto.setRoleName(role.getRoleName());
 
         List<String> userNames = new ArrayList<>();
-        List<User> users = role.getUserList();
-        for (User user: users) {
-            userNames.add(user.getUserName());
-        }
+//        List<User> users = role.getUsers();
+//        for (User user: users) {
+//            userNames.add(user.getUserName());
+//        }
         roleResponseDto.setUserNames(userNames);
 
         return roleResponseDto;
@@ -33,10 +33,10 @@ public class Mapper {
         userResponseDto.setPassword(user.getPassword());
 
         List<String> roleNames = new ArrayList<>();
-        List<Role> roles = user.getRoleList();
-        for (Role role: roles) {
-            roleNames.add(role.getRoleName());
-        }
+//        List<Role> roles = user.getRoles();
+//        for (Role role: roles) {
+//            roleNames.add(role.getRoleName());
+//        }
         userResponseDto.setRoleNames(roleNames);
 
         return userResponseDto;

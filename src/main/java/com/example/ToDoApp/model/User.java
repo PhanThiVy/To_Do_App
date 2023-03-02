@@ -3,24 +3,27 @@ package com.example.ToDoApp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
+@Table(name = "user_12")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true,length = 100)
     private String userName;
     private String password;
     @Email
     @NotEmpty
-    @Column(unique = true)
+    @Column(unique = true,length = 100)
     private String email;
     @ManyToMany(cascade =
             {
@@ -34,12 +37,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> roleList = new ArrayList<>();
+    private List<Role> roles;
     public void addRole(Role role) {
-        roleList.add(role);
+        roles.add(role);
     }
 
     public void removeRole(Role role) {
-        roleList.remove(role);
+        roles.remove(role);
     }
 }

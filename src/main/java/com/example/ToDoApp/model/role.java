@@ -1,32 +1,39 @@
 package com.example.ToDoApp.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    @Size(min = 5,max = 20)
     private String roleName;
-    @ManyToMany(mappedBy = "role",cascade =
+    @ManyToMany(mappedBy = "roles",cascade =
             {
                     CascadeType.DETACH,
                     CascadeType.MERGE,
                     CascadeType.REFRESH,
                     CascadeType.PERSIST
             }, fetch = FetchType.LAZY)
-    private List<User> userList = new ArrayList<>();
+    private List<User> users;
     public void addUser(User user) {
-        userList.add(user);
+        users.add(user);
     }
 
     public void removeUser(User user) {
-        userList.remove(user);
+        users.remove(user);
     }
 
 }
