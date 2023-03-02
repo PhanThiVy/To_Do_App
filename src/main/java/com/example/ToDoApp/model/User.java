@@ -28,5 +28,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> role = new ArrayList<>();
+    private List<Role> roleList = new ArrayList<>();
+    public void addRole(Role role) {
+        roleList.add(role);
+    }
+
+    public void removeRole(Role role) {
+        roleList.remove(role);
+    }
 }
