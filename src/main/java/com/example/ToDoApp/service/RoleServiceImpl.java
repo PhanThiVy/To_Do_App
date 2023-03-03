@@ -4,6 +4,7 @@ import com.example.ToDoApp.dto.mapper.Mapper;
 import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
 import com.example.ToDoApp.exception.NotFoundException;
+import com.example.ToDoApp.exception.RoleNameIsExisException;
 import com.example.ToDoApp.model.Role;
 import com.example.ToDoApp.model.User;
 import com.example.ToDoApp.repository.RoleRepository;
@@ -28,6 +29,9 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public RoleResponseDto addRole(RoleRequestDto roleRequestDto) {
         Role role = new Role();
+        //check role name is exist or not
+        roleNameIsExist(roleRequestDto.getRoleName());
+
         role.setRoleName(roleRequestDto.getRoleName());
         //save role
         roleRepository.save(role);
@@ -41,10 +45,7 @@ public class RoleServiceImpl implements RoleService{
         return rolePage.map(role -> modelMapper.map(role,RoleResponseDto.class));
     }
 
-    @Override
-    public boolean isNumberic(String roleId) {
-        return NumberUtils.isCreatable(roleId);
-    }
+
 
     @Override
     public Role getRole(String roleId) {
@@ -72,13 +73,27 @@ public class RoleServiceImpl implements RoleService{
     //delete role by id
     @Override
     public void deleteRole(String roleId) {
+        //check role is exist
         Role role = getRole(roleId);
         roleRepository.deleteById(role.getId());
+        if (!role.getUsers().isEmpty()){
+            for (User user: role.getUsers()) {
+                removeUser(role,user);
+            }
+        }
     }
 
+    //update role
     @Override
     public RoleResponseDto editRole(String roleId, RoleRequestDto roleRequestDto) {
-        return null;
+        //check role is exist
+        Role role = getRole(roleId);
+        //check role name is exist or not
+        roleNameIsExistForEdit(roleRequestDto.getRoleName(),role.getId());
+
+        role.setRoleName(roleRequestDto.getRoleName());
+        roleRepository.save(role);
+        return Mapper.roleToRoleResponseDto(role);
     }
 
     @Override
@@ -87,12 +102,35 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public void addBook(Role role, User user) {
-
+    public void addUser(Role role, User user) {
+        role.addUser(user);
+        roleRepository.save(role);
     }
 
     @Override
-    public void removeBook(Role role, User user) {
+    public void removeUser(Role role, User user) {
+        role.removeUser(user);
+        roleRepository.save(role);
+    }
 
+    @Override
+    public boolean isNumberic(String roleId) {
+        return NumberUtils.isCreatable(roleId);
+    }
+
+    @Override
+    public void roleNameIsExist(String roleName) {
+        Role role = roleRepository.findRoleByRoleNameIgnoreCase(roleName);
+        if(role!=null){
+            throw new RoleNameIsExisException(HttpStatus.CONFLICT.value(), " This role is exist - please enter a new one");
+        }
+    }
+
+    @Override
+    public void roleNameIsExistForEdit(String roleName,Long roleId) {
+        Role role = roleRepository.roleNameIsExistForEdit(roleName,roleId);
+        if(role!=null){
+            throw new RoleNameIsExisException(HttpStatus.CONFLICT.value(), " This role is exist - please enter a new one");
+        }
     }
 }
