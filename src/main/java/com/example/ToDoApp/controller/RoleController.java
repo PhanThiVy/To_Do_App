@@ -28,6 +28,11 @@ public class RoleController {
     }
 
     //get role by id
+    @GetMapping("/getById/{roleId}")
+    public ResponseEntity<RoleResponseDto> getRoleById(@PathVariable String roleId){
+        RoleResponseDto roleResponseDto = roleService.getRoleById(roleId);
+        return new ResponseEntity<>(roleResponseDto,HttpStatus.OK);
+    }
 
 
 
