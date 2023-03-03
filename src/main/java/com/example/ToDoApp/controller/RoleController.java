@@ -3,7 +3,6 @@ package com.example.ToDoApp.controller;
 import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
 import com.example.ToDoApp.service.RoleServiceImpl;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -49,6 +48,13 @@ public class RoleController {
     public ResponseEntity<RoleResponseDto> editRole(@PathVariable String roleId, @RequestBody RoleRequestDto roleRequestDto){
         RoleResponseDto roleResponseDto = roleService.editRole(roleId,roleRequestDto);
         return new ResponseEntity<>(roleResponseDto,HttpStatus.OK);
+    }
+
+    //search by role name
+    @GetMapping("/search-by-name")
+    public ResponseEntity<Page<RoleResponseDto>> searchByRoleName(@RequestParam String roleName, @RequestParam int pageNumber){
+        Page<RoleResponseDto> roles = roleService.searchByRoleName(roleName,pageNumber);
+        return new ResponseEntity<>(roles,HttpStatus.OK);
     }
 
 
