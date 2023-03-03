@@ -22,8 +22,7 @@ public class User {
     private String userName;
     private String password;
     @Email
-    @NotEmpty
-    @Column(unique = true,length = 100)
+    @Column(nullable = false,unique = true,length = 100)
     private String email;
     @ManyToMany(cascade =
             {

@@ -19,8 +19,8 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
-    @Size(min = 5,max = 20)
+
+    @Column(nullable = false,unique = true,length = 100)
     private String roleName;
     @ManyToMany(mappedBy = "roles",cascade =
             {
