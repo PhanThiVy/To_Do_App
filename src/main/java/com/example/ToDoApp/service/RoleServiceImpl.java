@@ -48,14 +48,15 @@ public class RoleServiceImpl implements RoleService{
         if (!String.valueOf(roleId).matches("\\d+")) {
             throw new NotFoundException(HttpStatus.NOT_FOUND.value(),"Please enter number for role id.");
         }
-        Role role = roleRepository.findById(roleId).orqElseThrow(()
+        Role role = roleRepository.findById(roleId).orElseThrow(()
                 -> new NotFoundException(HttpStatus.NOT_FOUND.value(),"Can not find role with id "+ roleId));
         return role;
     }
 
     @Override
     public RoleResponseDto getRoleById(Long roleId) {
-        return null;
+        Role role = getRole(roleId);
+        return Mapper.roleToRoleResponseDto(role);
     }
 
     @Override
