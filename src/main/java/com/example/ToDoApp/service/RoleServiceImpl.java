@@ -51,24 +51,29 @@ public class RoleServiceImpl implements RoleService{
         //check roleId is a number
         if (isNumberic(roleId)) {
             Long id = Long.parseLong(roleId);
+            //check role is exist
             Role role = roleRepository.findById(id).orElseThrow(()
                     -> new NotFoundException(HttpStatus.NOT_FOUND.value(),"Can not find role with id "+ roleId));
             return role;
         }
+        //if roleId is not number , thrown NotFoundException
         throw new NotFoundException(HttpStatus.NOT_FOUND.value(),"Please enter number for role id.");
 
 
     }
 
+    //method get a role by id
     @Override
     public RoleResponseDto getRoleById(String roleId) {
         Role role = getRole(roleId);
         return Mapper.roleToRoleResponseDto(role);
     }
 
+    //delete role by id
     @Override
     public void deleteRole(String roleId) {
-
+        Role role = getRole(roleId);
+        roleRepository.deleteById(role.getId());
     }
 
     @Override
