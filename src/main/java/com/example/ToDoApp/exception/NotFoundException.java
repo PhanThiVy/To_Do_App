@@ -6,7 +6,6 @@ import lombok.*;
 @Getter
 public class NotFoundException extends RuntimeException {
     private final ErrorDetail errorDetail;
-    private String message;
 
     public NotFoundException(int errorCode, String message) {
         super();
