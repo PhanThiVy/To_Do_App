@@ -9,5 +9,8 @@ public class ApplicationExceptionHandler {
     public ErrorDetail handlerNotFoundException(NotFoundException ex){
         return ex.getErrorDetail();
     }
-
+    @ExceptionHandler(RoleNameIsExisException.class)
+    public ErrorDetail handlerRuntimeException(RoleNameIsExisException ex){
+        return ex.getErrorDetail();
+    }
     }
