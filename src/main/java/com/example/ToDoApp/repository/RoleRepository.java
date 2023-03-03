@@ -16,6 +16,7 @@ import java.util.List;
 public interface RoleRepository extends JpaRepository<Role,Long> {
     public Page<Role> findAll(Pageable pageable);
     public Role findRoleByRoleNameIgnoreCase(String roleName);
+    public Page<Role> findRoleByRoleNameContainingIgnoreCase(String roleName,Pageable pageable);
     @Query(value = "SELECT * FROM role r WHERE r.role_name = :roleName and r.id != :roleId", nativeQuery = true)
     Role roleNameIsExistForEdit(@Param("roleName") String roleName, @Param("roleId") Long roleId);
 }

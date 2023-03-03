@@ -3,6 +3,8 @@ package com.example.ToDoApp.controller;
 import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
 import com.example.ToDoApp.service.RoleServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -35,10 +37,18 @@ public class RoleController {
     }
 
     //detelete role by id
+    @Transactional
     @GetMapping("/delete/{roleId}")
     public ResponseEntity<Object> deleteRoleById(@PathVariable String roleId){
         roleService.deleteRole(roleId);
         return ResponseEntity.noContent().build();
+    }
+
+    //edit role
+    @PutMapping("/edit/{roleId}")
+    public ResponseEntity<RoleResponseDto> editRole(@PathVariable String roleId, @RequestBody RoleRequestDto roleRequestDto){
+        RoleResponseDto roleResponseDto = roleService.editRole(roleId,roleRequestDto);
+        return new ResponseEntity<>(roleResponseDto,HttpStatus.OK);
     }
 
 
