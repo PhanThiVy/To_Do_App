@@ -9,10 +9,11 @@ import org.springframework.data.domain.Page;
 public interface RoleService {
     public RoleResponseDto addRole(RoleRequestDto roleRequestDto);
     public Page<RoleResponseDto> getRoleList(int pageNumber);
-    public Role getRole(Long roleId);
-    public RoleResponseDto getRoleById(Long roleId);
-    public void deleteRole(Long roleId);
-    public RoleResponseDto editRole(Long roleId, RoleRequestDto roleRequestDto);
+    public boolean isNumberic(String roleId);
+    public Role getRole(String roleId);
+    public RoleResponseDto getRoleById(String roleId);
+    public void deleteRole(String roleId);
+    public RoleResponseDto editRole(String roleId, RoleRequestDto roleRequestDto);
     public Page<RoleResponseDto> searchByRoleName(String roleName,int pageNumber);
     void addBook(Role role, User user);
     void removeBook(Role role, User user);
