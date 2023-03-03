@@ -98,7 +98,8 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public Page<RoleResponseDto> searchByRoleName(String roleName, int pageNumber) {
-        return null;
+        Page<Role> rolePage = roleRepository.findRoleByRoleNameContainingIgnoreCase(roleName,rolePageable.withPage(pageNumber));
+        return rolePage.map(role -> modelMapper.map(role,RoleResponseDto.class));
     }
 
     @Override
