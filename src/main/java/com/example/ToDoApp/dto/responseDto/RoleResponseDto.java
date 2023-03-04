@@ -1,6 +1,5 @@
 package com.example.ToDoApp.dto.responseDto;
 
-import com.example.ToDoApp.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
