@@ -70,6 +70,12 @@ public class RoleServiceImpl implements RoleService{
         return Mapper.roleToRoleResponseDto(role);
     }
 
+    @Override
+    public Role getRoleByName(String roleName) {
+        Role role = roleRepository.findRoleByRoleName(roleName);
+        return role;
+    }
+
     //delete role by id
     @Override
     public void deleteRole(String roleId) {
@@ -121,7 +127,7 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public void roleNameIsExist(String roleName) {
-        Role role = roleRepository.findRoleByRoleNameIgnoreCase(roleName);
+        Role role = roleRepository.findRoleByRoleName(roleName);
         if(role!=null){
             throw new RoleNameIsExisException(HttpStatus.CONFLICT.value(), " This role is exist - please enter a new one");
         }
