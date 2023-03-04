@@ -1,9 +1,11 @@
 package com.example.ToDoApp.dto.requestDto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+
 import lombok.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,10 +15,13 @@ import lombok.*;
 public class UserRequestDto {
     @NotEmpty
     @Size(min = 5,max = 60)
-    private String username;
+    private String fullName;
+    @NotEmpty
+    @Size(min = 5,max = 60)
+    private String userName;
 
     @NotEmpty
-    @Size(min = 8,max = 20)
+    @Size(min = 5,max = 30)
     private String password;
 
     @NotEmpty
