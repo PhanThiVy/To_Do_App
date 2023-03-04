@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,8 +14,11 @@ import java.util.List;
 @Getter
 public class UserResponseDto {
     private Long id;
-    private String username;
-    private String password;
+    private String fullName;
+    private String userName;
     private String email;
     private List<String> roleNames;
+    private LocalDate registrationDate;
+    private Boolean locked;
+    private Boolean enabled;
 }
