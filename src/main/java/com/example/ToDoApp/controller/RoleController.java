@@ -4,11 +4,13 @@ import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
 import com.example.ToDoApp.service.RoleServiceImpl;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class RoleController {
     private final RoleServiceImpl roleService;
     @PostMapping("/add")
-    public ResponseEntity<RoleResponseDto> addRole(@RequestBody RoleRequestDto roleRequestDto){
+    public ResponseEntity<RoleResponseDto> addRole(@Valid @RequestBody RoleRequestDto roleRequestDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+//            bindingResult.get
+        }
         RoleResponseDto roleResponseDto = roleService.addRole(roleRequestDto);
         return new ResponseEntity<>(roleResponseDto, HttpStatus.OK);
     }
