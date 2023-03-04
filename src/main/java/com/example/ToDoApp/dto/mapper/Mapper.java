@@ -16,27 +16,39 @@ public class Mapper {
         roleResponseDto.setRoleName(role.getRoleName());
 
         List<String> userNames = new ArrayList<>();
-//        List<User> users = role.getUsers();
-//        for (User user: users) {
-//            userNames.add(user.getUserName());
-//        }
+        List<User> users = role.getUsers();
+        for (User user: users) {
+            userNames.add(user.getUserName());
+        }
         roleResponseDto.setUserNames(userNames);
 
         return roleResponseDto;
 
     }
 
+    public static List<RoleResponseDto> authorsToAuthorResponseDtos(List<Role> roles){
+        List<RoleResponseDto> roleResponseDtos= new ArrayList<>();
+        for (Role role: roles) {
+            roleResponseDtos.add(roleToRoleResponseDto(role));
+        }
+        return roleResponseDtos;
+    }
+
     public static UserResponseDto userToUserResponseDto(User user){
         UserResponseDto userResponseDto =new UserResponseDto();
-        userResponseDto.setId(user.getId());
-        userResponseDto.setUsername(user.getUserName());
-        userResponseDto.setPassword(user.getPassword());
 
+        userResponseDto.setId(user.getId());
+        userResponseDto.setFullName(user.getFullName());
+        userResponseDto.setUserName(user.getUserName());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setRegistrationDate(user.getRegistrationDate());
+        userResponseDto.setLocked(user.getLocked());
+        userResponseDto.setEnabled(user.getEnabled());
         List<String> roleNames = new ArrayList<>();
-//        List<Role> roles = user.getRoles();
-//        for (Role role: roles) {
-//            roleNames.add(role.getRoleName());
-//        }
+        List<Role> roles = user.getRoles();
+        for (Role role: roles) {
+            roleNames.add(role.getRoleName());
+        }
         userResponseDto.setRoleNames(roleNames);
 
         return userResponseDto;
