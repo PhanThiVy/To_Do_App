@@ -1,6 +1,7 @@
 package com.example.ToDoApp.dto.requestDto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,5 +11,6 @@ import lombok.*;
 @Builder
 public class RoleRequestDto {
     @NotEmpty
+    @Size(min = 3,max = 20)
     private String roleName;
 }
