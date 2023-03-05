@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
     public UserResponseDto addUser(UserRequestDto userRequestDto);
+    public UserResponseDto addAdmin(UserRequestDto userRequestDto);
     public UserResponseDto addRoleToUserToUser(String userId, String roleId);
     public UserResponseDto deleteRoleFromUser(String bookId, String roleId);
     public boolean isNumberic(String userId);

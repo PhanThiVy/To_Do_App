@@ -1,13 +1,13 @@
 package com.example.ToDoApp.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +29,7 @@ public class Role {
                     CascadeType.REFRESH,
                     CascadeType.PERSIST
             }, fetch = FetchType.LAZY)
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
     public void addUser(User user) {
         users.add(user);
     }

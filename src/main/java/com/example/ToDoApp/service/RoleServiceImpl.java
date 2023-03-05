@@ -3,7 +3,7 @@ package com.example.ToDoApp.service;
 import com.example.ToDoApp.dto.mapper.Mapper;
 import com.example.ToDoApp.dto.requestDto.RoleRequestDto;
 import com.example.ToDoApp.dto.responseDto.RoleResponseDto;
-import com.example.ToDoApp.exception.NotFoundException;
+import com.example.ToDoApp.exception.userException.NotFoundException;
 import com.example.ToDoApp.exception.RoleNameIsExisException;
 import com.example.ToDoApp.model.Role;
 import com.example.ToDoApp.model.User;

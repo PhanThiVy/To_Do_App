@@ -1,10 +1,12 @@
 package com.example.ToDoApp.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,13 +19,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true,length = 100)
+    @Column(nullable = false, length = 60)
+    private String fullName;
+    @Column(nullable = false, unique = true,length = 60)
     private String userName;
+    @Column(nullable = false,length = 60)
     private String password;
     @Email
-    @Column(nullable = false,unique = true,length = 100)
+    @Column(nullable = false,unique = true,length = 60)
     private String email;
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate registrationDate = LocalDate.now();
+//    @Builder.Default
+    private Boolean locked = false;
+
+//    @Builder.Default
+    private Boolean enabled = false;
     @ManyToMany(cascade =
             {
                     CascadeType.DETACH,
@@ -36,7 +48,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
     public void addRole(Role role) {
         roles.add(role);
     }

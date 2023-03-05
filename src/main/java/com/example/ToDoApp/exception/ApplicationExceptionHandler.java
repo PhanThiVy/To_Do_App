@@ -21,7 +21,7 @@ public class ApplicationExceptionHandler {
         return ex.getErrorDetail();
     }
     @ExceptionHandler(UserNotValidException.class)
-    public ErrorDetail handlerUserNotValidException(UserNameExistException ex){
+    public ErrorDetail handlerUserNotValidException(UserNotValidException ex){
         return ex.getErrorDetail();
     }
 }

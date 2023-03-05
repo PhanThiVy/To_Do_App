@@ -1,5 +1,6 @@
-package com.example.ToDoApp.exception;
+package com.example.ToDoApp.exception.userException;
 
+import com.example.ToDoApp.exception.ErrorDetail;
 import lombok.*;
 
 @RequiredArgsConstructor
