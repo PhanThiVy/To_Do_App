@@ -39,12 +39,6 @@ public class RoleController {
         return new ResponseEntity<>(roleResponseDtos,HttpStatus.OK);
     }
 
-    //get role by id
-    @GetMapping("/getById/{roleId}")
-    public ResponseEntity<RoleResponseDto> getRoleById(@PathVariable String roleId){
-        RoleResponseDto roleResponseDto = roleService.getRoleById(roleId);
-        return new ResponseEntity<>(roleResponseDto,HttpStatus.OK);
-    }
 
     //detelete role by id
     @Transactional
