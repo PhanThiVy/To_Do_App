@@ -63,12 +63,6 @@ public class RoleServiceImpl implements RoleService{
 
     }
 
-    //method get a role by id
-    @Override
-    public RoleResponseDto getRoleById(String roleId) {
-        Role role = getRole(roleId);
-        return Mapper.roleToRoleResponseDto(role);
-    }
 
     @Override
     public Role getRoleByName(String roleName) {
@@ -89,24 +83,7 @@ public class RoleServiceImpl implements RoleService{
         }
     }
 
-    //update role
-    @Override
-    public RoleResponseDto editRole(String roleId, RoleRequestDto roleRequestDto) {
-        //check role is exist
-        Role role = getRole(roleId);
-        //check role name is exist or not
-        roleNameIsExistForEdit(roleRequestDto.getRoleName(),role.getId());
 
-        role.setRoleName(roleRequestDto.getRoleName());
-        roleRepository.save(role);
-        return Mapper.roleToRoleResponseDto(role);
-    }
-
-    @Override
-    public Page<RoleResponseDto> searchByRoleName(String roleName, int pageNumber) {
-        Page<Role> rolePage = roleRepository.findRoleByRoleNameContainingIgnoreCase(roleName,rolePageable.withPage(pageNumber));
-        return rolePage.map(role -> modelMapper.map(role,RoleResponseDto.class));
-    }
 
     @Override
     public void addUser(Role role, User user) {

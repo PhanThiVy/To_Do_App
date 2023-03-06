@@ -10,11 +10,8 @@ public interface RoleService {
     public RoleResponseDto addRole(RoleRequestDto roleRequestDto);
     public Page<RoleResponseDto> getRoleList(int pageNumber);
     public Role getRole(String roleId);
-    public RoleResponseDto getRoleById(String roleId);
     public Role getRoleByName(String roleName);
     public void deleteRole(String roleId);
-    public RoleResponseDto editRole(String roleId, RoleRequestDto roleRequestDto);
-    public Page<RoleResponseDto> searchByRoleName(String roleName,int pageNumber);
     void addUser(Role role, User user);
     void removeUser(Role role, User user);
     public boolean isNumberic(String roleId);

@@ -4,6 +4,9 @@ import com.example.ToDoApp.dto.requestDto.UserRequestDto;
 import com.example.ToDoApp.dto.responseDto.UserResponseDto;
 import com.example.ToDoApp.exception.userException.UserNotValidException;
 import com.example.ToDoApp.service.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@OpenAPIDefinition(info = @Info(title = "Foos API", version = "v1"))
+@SecurityRequirement(name = "basicAuth")
 public class UserController {
     private final UserService userService;
     @PostMapping("/add")
